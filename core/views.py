@@ -1,14 +1,26 @@
 from django.contrib.auth import authenticate, login, logout
 from django.shortcuts import render, redirect
 from django.contrib import messages
+from django.shortcuts import get_object_or_404
 from .forms import LoginForm, UserRegisterForm
+from .models import Record
 
 
 def homepage_view(request):
     if request.user.is_authenticated:
-        return render(request, 'homepage.html')
+        records = Record.objects.all()
+        return render(request, 'homepage.html', {'records': records})
     else:
         return redirect('login')
+
+
+
+def record_view(request, pk):
+    if request.user.is_authenticated:
+        record = get_object_or_404(Record, pk=pk)
+        return render(request, 'record.html', {'record': record})
+    else:
+        redirect('login')
 
 
 def login_view(request):

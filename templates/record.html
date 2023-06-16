@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+
+{% block title %}
+{{ record }}
+{% endblock %}
+
+{% block content %}
+<div class="card" style="width: 18rem;">
+    <div class="card-header">ID: {{ record.id }} | {{ record.created_at }}</div>
+    <ul class="list-group list-group-flush">
+        <div class="card-body">
+            <h5 class="card-title">{{record.first_name}} {{record.last_name}}</h5>
+            <p>Born: {{ record.birth_date }}</p>
+        </div>
+    </ul>
+    <ul class="list-group list-group-flush">
+        <li class="list-group-item "><span class="fw-semibold">Email:</span> {{ record.email }}</li>
+        <li class="list-group-item"><span class="fw-semibold">Tel Number:</span> {{ record.tel_number }}</li>
+    </ul>
+    <ul class="list-group list-group-flush">
+        <li class="list-group-item"><span class="fw-semibold">Address:</span> {{ record.address }}</li>
+        <li class="list-group-item"><span class="fw-semibold">Zip Code:</span> {{ record.zip_code }}</li>
+        <li class="list-group-item"><span class="fw-semibold">State:</span> {{ record.state }}</li>
+        <li class="list-group-item"><span class="fw-semibold">Country:</span> {{ record.country }}</li>
+    </ul>
+    <div class="card-body">
+        <a href="#" class="card-link">Edit</a>
+        <a href="#" class="card-link">Delete</a>
+    </div>
+</div>
+{% endblock %}
