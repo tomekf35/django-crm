@@ -1,7 +1,7 @@
 from django.contrib.auth import authenticate, login, logout
 from django.shortcuts import render, redirect
-from .forms import LoginForm
 from django.contrib import messages
+from .forms import LoginForm, UserRegisterForm
 
 
 def homepage_view(request):
@@ -31,3 +31,15 @@ def login_view(request):
 def logout_view(request):
     logout(request)
     return redirect('homepage')
+
+
+def register_view(request):
+    if request.method =='POST':
+        form = UserRegisterForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('login')
+    else:
+        form = UserRegisterForm()
+    return render(request, 'register.html', {'form': form})
+    

@@ -9,6 +9,9 @@
             <ul class="navbar-nav">
                 {% if request.user.is_authenticated %}
                 <li class="nav-item">
+                    <span class="nav-link">Hello, {{ request.user.username }}</span>
+                </li>
+                <li class="nav-item">
                     <a class="nav-link" href="{% url 'logout' %}">Logout</a>
                 </li>
                 {% else %}
@@ -16,7 +19,7 @@
                     <a class="nav-link" href="{% url 'login' %}">Login</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href=" #">Register</a>
+                    <a class="nav-link" href="{% url 'register' %}">Register</a>
                 </li>
                 {% endif %}
             </ul>
