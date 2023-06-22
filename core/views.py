@@ -2,7 +2,8 @@ from django.contrib.auth import authenticate, login, logout
 from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.shortcuts import get_object_or_404
-from .forms import LoginForm, UserRegisterForm
+from django.urls import reverse_lazy
+from .forms import LoginForm, UserRegisterForm, AddRecordForm
 from .models import Record
 
 
@@ -12,7 +13,6 @@ def homepage_view(request):
         return render(request, 'homepage.html', {'records': records})
     else:
         return redirect('login')
-
 
 
 def record_view(request, pk):
@@ -54,4 +54,42 @@ def register_view(request):
     else:
         form = UserRegisterForm()
     return render(request, 'register.html', {'form': form})
+    
+    
+def add_record_view(request):
+    if request.user.is_authenticated:
+        if request.method == 'POST':
+            form = AddRecordForm(request.POST)
+            if form.is_valid():
+                form.save()
+                return redirect('homepage')
+        else:
+            form = AddRecordForm()
+        return render(request, 'add_record.html', {'form': form})
+    else:
+        return redirect('login')
+    
+    
+def edit_record_view(request, pk):
+    if request.user.is_authenticated:
+        record = get_object_or_404(Record, pk=pk)
+        if request.method == 'POST':
+            form = AddRecordForm(request.POST, instance=record)
+            if form.is_valid():
+                form.save()
+                return redirect(reverse_lazy('record_detail', kwargs={'pk': pk}))
+        else:
+            form = AddRecordForm(instance=record)
+        return render(request, 'edit_record.html', {'form': form})
+    else:
+        return redirect('login')
+    
+    
+def delete_record_view(request, pk):
+    if request.user.is_authenticated:
+        record = get_object_or_404(Record, pk=pk)
+        record.delete()
+        return redirect('homepage')
+    else:
+        return redirect('login')
     
