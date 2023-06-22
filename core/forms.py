@@ -18,7 +18,6 @@ class UserRegisterForm(UserCreationForm):
 
 
 class AddRecordForm(forms.ModelForm):
-    birth_date = forms.DateField(widget=DateInput(attrs={'type': 'date'}))
     class Meta:
         model = Record
         fields = (

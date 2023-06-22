@@ -5,11 +5,41 @@ Add Record
 {% endblock %}
 
 {% block content %}
-Add New Record
-<form action="" method="post">
-    {% csrf_token %}
-    {{form.as_p}}
-    <button type="submit">Submit</button>
-</form>
+<div class="d-flex justify-content-center">
+    <h4>Add New Record</h4>
+</div>
+<div class="d-flex justify-content-center">
+    <form method="post">
+        {% csrf_token %}
+        <div class="mb-1">
+            <input type="text" class="form-control" name="first_name" placeholder="First Name" required>
+        </div>
+        <div class="mb-1">
+            <input type="text" class="form-control" name="last_name" placeholder="Last Name" required>
+        </div>
+        <div class="mb-1">
+            <input type="date" class="form-control " name="birth_date" placeholder="Birth Date" required>
+        </div>
+        <div class="mb-1">
+            <input type="email" class="form-control" name="email" placeholder="Email" required>
+        </div>
+        <div class="mb-1">
+            <input type="text" class="form-control" name="tel_number" placeholder="Telephone Number" required>
+        </div>
+        <div class="mb-1">
+            <input type="text" class="form-control" name="address" placeholder="Address" required>
+        </div>
+        <div class="mb-1">
+            <input type="text" class="form-control" name="zip_code" placeholder="Zip Code" required>
+        </div>
+        <div class="mb-1">
+            <input type="text" class="form-control" name="state" placeholder="State" required>
+        </div>
+        <div class="mb-1">
+            <input type="text" class="form-control" name="country" placeholder="Country" required>
+        </div>
+        <button type="submit" class="btn btn-secondary">Submit</button>
+    </form>
+</div>
 
 {% endblock %}
